@@ -1,4 +1,8 @@
+<<<<<<< Updated upstream
 var env = process.env.NODE_ENV || "development";
+=======
+//<script src="http://code.responsivevoice.org/responsivevoice.js"></script>
+>>>>>>> Stashed changes
 var express = require('express');
 var app = express();
 
@@ -40,3 +44,4 @@ var server = app.listen(3000, function () {
 
   console.log('Example app listening at http://%s:%s', host, port);
 });
+// var voicelist = responsivevoice.getVoice();
