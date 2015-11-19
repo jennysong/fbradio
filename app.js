@@ -1,4 +1,4 @@
-
+var env = process.env.NODE_ENV || "development";
 var express = require('express');
 var app = express();
 
@@ -7,7 +7,7 @@ var redirect_uri = "http://localhost:3000/authorize";
 var client_secret = "9354ac000665ddc74852157b3e6a686e";
 
 
-global.config = require(__dirname + '/config.json');
+global.config = require(__dirname + '/config.json')[env];
 
 
 app.set('view engine', 'ejs');
@@ -21,7 +21,7 @@ app.get('/', function (req, res) {
 
 app.get('/login', function (req, res) {
   scopes = ['public_profile', 'read_stream']
-  res.redirect('https://www.facebook.com/dialog/oauth?client_id='+client_id+'&scope='+ scopes.join('+') +'&redirect_uri='+redirect_uri)
+  res.redirect('https://www.facebook.com/dialog/oauth?client_id='+config.client_id+'&scope='+ scopes.join('+') +'&redirect_uri='+config.redirect_uri)
 });
 
 app.get('/authorize', function (req, res) {
