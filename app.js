@@ -8,6 +8,9 @@ app.get('/', function (req, res) {
   res.send('Working!');
 });
 
+app.get('/music', function (req,res){
+	res.render('music.ejs')
+})
 
 
 var server = app.listen(3000, function () {
