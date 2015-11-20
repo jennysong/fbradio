@@ -76,6 +76,13 @@ a.navbar-brand:hover, :active {
   padding-top: 100px;
   font-size: 500px;
 }
+
+@media screen and (max-width: 720px) {
+   .podcast i {
+       font-size: 250px;
+   }
+}
+
 .podcast i:hover {
   color: #0D47A1;
   -moz-transition: all 0.5s ease-in-out;
@@ -99,6 +106,7 @@ label i {
   color: #3b5998;
   opacity: 0.8;
 }
+
 .fa-eye-slash {
   font-size: 150px;
   color: #3b5998;
