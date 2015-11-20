@@ -2,11 +2,6 @@ var env = process.env.NODE_ENV || "development";
 var express = require('express');
 var app = express();
 
-var client_id = "875721715860023";
-var redirect_uri = "http://localhost:3000/authorize";
-var client_secret = "9354ac000665ddc74852157b3e6a686e";
-
-
 global.config = require(__dirname + '/config.json')[env];
 
 
@@ -20,16 +15,19 @@ app.get('/', function (req, res) {
 });
 
 app.get('/login', function (req, res) {
-  scopes = ['public_profile', 'read_stream']
+  scopes = ['public_profile'] //read_stream
   res.redirect('https://www.facebook.com/dialog/oauth?client_id='+config.client_id+'&scope='+ scopes.join('+') +'&redirect_uri='+config.redirect_uri)
 });
 
+
+
 app.get('/authorize', function (req, res) {
+  console.log(res);
   query = "client_id=" + config.client_id + "&redirect_uri=" + config.redirect_uri + "&client_secret=" + config.client_secret + "&code=" + req.query.code
   rest.get("https://graph.facebook.com/v2.3/oauth/access_token?" + query, function(data, response){
     data = JSON.parse(data.toString())
     req.session.access_token = data.access_token
-    res.redirect('/loading')
+    res.redirect('/index')
   })
 });
 
