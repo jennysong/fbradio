@@ -9,6 +9,11 @@ var session = require('express-session')
 var file_store = require('session-file-store')(session)
 var moment = require('moment');
 var secureRandom = require('secure-random')
+var base64        = require('base-64')
+var utf8          = require('utf8')
+var Client        = require('node-rest-client').Client;
+var OAuth         = require('oauth');
+var client        = new Client()
 
 var app = require('express')();
 var http = require('http').Server(app);
@@ -57,6 +62,67 @@ app.get('/music', function (req, res) {
   login_users.add(randomSecurity, req.session.access_token);
   res.render('music', {rand_token: randomSecurity});
 });
+
+ var OAuth2 = OAuth.OAuth2;    
+ var twitterConsumerKey = config.twitter_key;
+ var twitterConsumerSecret = config.twitter_secret;
+ var oauth2 = new OAuth2(
+   twitterConsumerKey,
+   twitterConsumerSecret, 
+   'https://api.twitter.com/', 
+   null,
+   'oauth2/token', 
+   null);
+
+app.get('/login2', function (req, res) {
+  oauth2.getOAuthAccessToken(
+   '',
+   {'grant_type':'client_credentials'},
+   function (e, access_token, refresh_token, results){
+     console.log('bearer: ',access_token);
+     /*
+     oauth2.get('protected url', 
+       access_token, function(e,data,res) {
+         if (e) return callback(e, null);
+         if (res.statusCode!=200) 
+           return callback(new Error(
+             'OAuth2 request failed: '+
+             res.statusCode),null);
+         try {
+           data = JSON.parse(data);
+
+         }
+         catch (e){
+           return callback(e, null);
+         }
+         return callback(e, data);
+      });*/
+   });
+
+  /*
+  //var bytes1 = utf8.encode(config.twitter_key)
+  //var bytes2 = utf8.encode(config.twitter_secret)
+  var encoded = base64.encode(config.twitter_key+":"+config.twitter_secret)
+  //var encoded = config.twitter_key+config.twitter_secret
+  //console.log(encoded);
+  //console.log(utf8.decode(base64.decode(encoded)));
+  encoded = "Basic " + encoded
+  var args = {
+    "Authorization": encoded,
+    "User-Agent": "My Twitter App v1.0.23",
+    "Content-Length": "29",
+    "Accept-Encoding": "gzip",
+    "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
+    "grant_type": "client_credentials"
+  }
+  client.post("https://api.twitter.com/oauth2/token", args, function (data, response){
+    console.log(response);
+    //res.redirect('music')
+
+  });*/
+});
+  
+  
 
 
 var server = http.listen(config.port, function () {
