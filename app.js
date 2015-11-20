@@ -1,5 +1,9 @@
 var env = process.env.NODE_ENV || "development";
 
+global._      = require('underscore')
+global.config = require(__dirname + '/config.json')[env];
+global.rest   = new (require('node-rest-client').Client);
+
 var express = require('express');
 var session = require('express-session')
 var file_store = require('session-file-store')(session)
@@ -10,10 +14,7 @@ var app = require('express')();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
 
-
-global.config = require(__dirname + '/config.json')[env];
-global.rest   = new (require('node-rest-client').Client);
-
+var clarifai   = new (require('./clarifai'))(config.clarifai)
 
 app.set('view engine', 'ejs');
 app.set('views', './views');
@@ -74,22 +75,46 @@ var request_data = function(user){
   // the user object has socket object now.
   // also the user object has access_token.
 
-  var messages_array = []  
+  // var messages_array = []  
   var last_request_time
-  rest.get("https://graph.facebook.com/me/feed?fields=from,message,story,created_time,id&access_token="+user.access_token, function(data, response){
+  rest.get("https://graph.facebook.com/me/feed?fields=from,message,story,created_time,id,full_picture&access_token="+user.access_token, function(data, response){
     postData = JSON.parse(data.toString());
     feedData = postData.data;
     count = feedData.length;
     for (i=count-1; i>=0; i--){
       if (feedData[i].created_time > user.latest_request_time && feedData[i].from.name != user.user_name){  //>=
-        message = {
-          id: feedData[i].id,
-          text: feedData[i].message,
-          name: feedData[i].from.name,
-          story: feedData[i].story,
-          posted_at: feedData[i].created_time
+        var post_feed_data = feedData[i]
+        var emit_message = function(message_data, tags) {
+          message = {
+            id: message_data.id,
+            text: message_data.message,
+            name: message_data.from.name,
+            story: message_data.story,
+            posted_at: message_data.created_time,
+            picture: message_data.full_picture,
+            tags: tags || []
+          }
+          user.socket.emit('new_messages', JSON.stringify([message]));
         }
-        messages_array.push(message); 
+        if(post_feed_data.full_picture) {
+          clarifai.get_tags([post_feed_data.full_picture], function(tags) {
+            emit_message(post_feed_data, tags);
+          })
+        } else {
+          emit_message(post_feed_data);
+        }
+
+
+        // message = {
+        //   id: feedData[i].id,
+        //   text: feedData[i].message,
+        //   name: feedData[i].from.name,
+        //   story: feedData[i].story,
+        //   posted_at: feedData[i].created_time,
+        //   picture: feedData[i].full_picture 
+        // }
+        // console.log(message.picture)
+        // messages_array.push(message); 
         last_request_time = feedData[i].created_time
       }
     }
@@ -97,9 +122,9 @@ var request_data = function(user){
 
     // our app sends the message_array to the user's socket. 
 
-    if(messages_array.length > 0) {
-      user.socket.emit('new_messages', JSON.stringify(messages_array));
-    }
+    // if(messages_array.length > 0) {
+    //   user.socket.emit('new_messages', JSON.stringify(messages_array));
+    // }
   });
 }
 

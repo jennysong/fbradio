@@ -6,7 +6,11 @@
     "client_secret": "9354ac000665ddc74852157b3e6a686e",
     "twitter_key": "Cb9Z829xpCgLCDhNyd5BXwRUc",
     "twitter_secret": "zhAmK5VFHSEiBEeiBvAeGtLmlhHyj0xKGK3Rt5oDm54fg1zb7i",
-    "twitter_nonce": "aefasfef8sdfsd51fw4r84sf5sg24x145eq46sf"
+    "twitter_nonce": "aefasfef8sdfsd51fw4r84sf5sg24x145eq46sf",
+    "clarifai": {
+      "client_id": "iOGd0t0_ah9kIUPfPPgx_13Pr3rFxBIxUcuYGq0D",
+      "client_secret": "u_ssbH_NonNuxVc-r6PZiKueEHvnExbJ9Gsaxxey"
+    }
   },
   "production": {
     "port": 80,
@@ -15,6 +19,10 @@
     "client_secret": "9354ac000665ddc74852157b3e6a686e",
     "twitter_key": "Cb9Z829xpCgLCDhNyd5BXwRUc",
     "twitter_secret": "zhAmK5VFHSEiBEeiBvAeGtLmlhHyj0xKGK3Rt5oDm54fg1zb7i",
-    "twitter_nonce": "aefasfef8sdfsd51fw4r84sf5sg24x145eq46sf"
+    "twitter_nonce": "aefasfef8sdfsd51fw4r84sf5sg24x145eq46sf",
+    "clarifai": {
+      "client_id": "iOGd0t0_ah9kIUPfPPgx_13Pr3rFxBIxUcuYGq0D",
+      "client_secret": "u_ssbH_NonNuxVc-r6PZiKueEHvnExbJ9Gsaxxey"
+    }
   }
 }

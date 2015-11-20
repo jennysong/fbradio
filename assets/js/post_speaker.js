@@ -26,6 +26,7 @@ PostSpeaker.prototype.speak = function(index, callback) {
   var listener = new VoiceListener(message.id);
   if(!message) return;
 
+  console.log('## app speaks: ' + this.humanize_message(message));
   responsiveVoice.speak(this.humanize_message(message), this.voice_tone, {
     onstart: function() {
       volume_down();
@@ -45,7 +46,13 @@ PostSpeaker.prototype.speak = function(index, callback) {
 }
 
 PostSpeaker.prototype.humanize_message = function(message) {
-  return message.text + ". posted by " + message.name  + " " + moment(message.posted_at).fromNow() + "."
+  if (message.picture&&message.tags.length){
+    message.tags.length = 6;
+    return message.text + ". posted by " + message.name  + " " + moment(message.posted_at).fromNow() + ". shared a photo with these tags. " + message.tags.join(', ') ;
+  }
+  else {
+    return message.text + ". posted by " + message.name  + " " + moment(message.posted_at).fromNow() + "."
+  }
   // "Hi Jenny. posted by Shawn Jung a second ago."
 }
 

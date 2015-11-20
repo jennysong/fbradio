@@ -129,17 +129,8 @@
         var posts = JSON.parse(stringified_data);
 
         $(posts).each(function(index, post) {
-<<<<<<< HEAD
-          setTimeout(function() {
-            responsiveVoice.speak(post[3]);
-          }, 2000*index)
-
-        })
-
-=======
           speaker.add(post);
         })
->>>>>>> 6dca99bf402742f8a548aa05d689e9e7616f4866
       })
 
     </script>
