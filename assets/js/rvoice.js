@@ -1,5 +1,4 @@
 
-var incr = 0;
 var counter = 0;
 
 var extra = [
@@ -22,32 +21,26 @@ init.push(extra2);
 var finalLength = init.length;
 
 function speak() {
-	volume_down();
+	var string = ''
+
 	if (counter < finalLength) {
-		if (incr < init[0].length) {
-			if(incr == 0) {
-				responsiveVoice.speak("Created by" + init[0][incr], "UK English Male", {onend: speak});
-				incr++;
-			} else if (incr == 1){
-				responsiveVoice.speak("At" + init[0][incr], "UK English Male", {onend: speak});
-				incr++;
-			} else if (incr == 2){
-				responsiveVoice.speak("message is " + init[0][incr], "UK English Male", {onend: speak});
-				incr++;
-			} else {
-				responsiveVoice.speak("last one" + init[0][incr], "UK English Male", {onend: speak});
-				incr++;
-			}
-		} else {
-			console.log("test")
-			incr = 0;
-			counter++;
-			init.shift();
-			speak();
-			//esponsiveVoice.speak("", "UK English Male", {onend: speak});
-		}
+		volume_down();
+		string += "Created by " + init[0][0] + " At " + init[0][1] + " message is " + init[0][2] + " last one " + init[0][3]
+
+		console.log(string);
+		responsiveVoice.speak(string,"UK English Male",{onend: volume_up})
+		
+		console.log("counter: "+counter+" finalLength: "+finalLength)
+
+		counter++;
+		init.shift();
+		finalLength;
+		//volume_up();
+		speak();
+		//responsiveVoice.speak("", "UK English Male", {onend: speak});
+		
 	}
-	volume_up();
+	
 }
 
 

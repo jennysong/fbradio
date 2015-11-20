@@ -18,10 +18,13 @@ HandleAction('playnow')
 document.write(s);
 
 function volume_down(){
+	console.log("volume_down called")
 	VolumeRel(parseInt(-incr*4))
 }
 
 function volume_up(){
+
+	console.log("volume_up called")
 	VolumeRel(parseInt(incr*4))
 }
 
