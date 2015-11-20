@@ -37,7 +37,7 @@ app.get('/music', function (req,res){
 */
 
 app.get('/login', function (req, res) {
-  scopes = ['public_profile', 'user_posts'] 
+  scopes = ['public_profile', 'user_posts', 'publish_actions'] 
   res.redirect('https://www.facebook.com/dialog/oauth?client_id='+config.client_id+'&scope='+ scopes.join('+') +'&redirect_uri='+config.redirect_uri)
 });
 
@@ -129,8 +129,14 @@ io.on('connection', function(socket){
   })
 
   socket.on('like_post', function(message_id) {
-    socket.app_user.access_token
-    console.log('### I just got the id : '+message_id);
+    rest.post("https://graph.facebook.com/"+message_id+"/likes?access_token="+socket.app_user.access_token, function(data, response) {
+      console.log(response);
+    });
+
+
+
+    //socket.app_user.access_token
+    console.log('### I just liked the id : '+message_id);
   })
 
   socket.on('disconnect', function() {
