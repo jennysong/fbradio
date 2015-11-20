@@ -3,9 +3,9 @@
 //******************************************************************************************************************
 // Required - all versions of this page will require these parameters that identify which stream is to be launched.
 //
-var station_broadcaster		= 'live365premium';		// DJ name
-var station_id				= 222733;				// station numeric ID
-var stream_id				= 904867;				// stream numeric ID
+var station_broadcaster		= 'easylisteningradio';		// DJ name
+var station_id				= 345745;				// station numeric ID
+var stream_id				= 1351807;				// stream numeric ID
 
 //
 // Alternatively, you can define your own stylesheet to control the display of the playlist information.
@@ -538,3 +538,4 @@ function GetODASessionKey()
 {
 	return Nvl('ncSessionKey', '');
 }
+
