@@ -538,4 +538,3 @@ function GetODASessionKey()
 {
 	return Nvl('ncSessionKey', '');
 }
-

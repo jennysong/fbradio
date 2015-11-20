@@ -1,16 +1,35 @@
-var s = ''
-memberName	= station_broadcaster;		// make sure player control and page agree on what station we're playing!
-streamID	= stream_id;
+setCustomVolume();
+DrawPlayer(0, gPlayerColor);
+var incr;
 
-if (player != "MP3") {					// Draw player; bypass check version/LS logic
-	DrawPlayer(0, gPlayerColor);		// Draw the embedded audio playback control
+function setCustomVolume()
+{
+	var v = GetCookieVolume();
+
+	SetVolumeRanges(parent.GetPlayer());
+	incr = gProgressIncr;
+	VolRange = gMaxVol - gMinVol;
+	gOffCells = Math.floor(Math.abs((VolRange-Math.abs(v))/incr));
+
 }
-
-
 
 HandleAction('playnow')
 
-
 document.write(s);
 
+function volume_down(){
+	VolumeRel(parseInt(-incr*4))
+}
 
+function volume_up(){
+	VolumeRel(parseInt(incr*4))
+}
+
+function startMusic(){
+
+	HandleAction('playnow')
+}
+
+function stop(){
+	HandleAction('stop')	
+}
