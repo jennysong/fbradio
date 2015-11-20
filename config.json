@@ -15,7 +15,7 @@
   "production": {
     "port": 3000,
     "client_id": "875721715860023",
-    "redirect_uri": "http://thevoicebook.me/authorize",
+    "redirect_uri": "https://thevoicebook.me/authorize",
     "client_secret": "9354ac000665ddc74852157b3e6a686e",
     "twitter_key": "Cb9Z829xpCgLCDhNyd5BXwRUc",
     "twitter_secret": "zhAmK5VFHSEiBEeiBvAeGtLmlhHyj0xKGK3Rt5oDm54fg1zb7i",
