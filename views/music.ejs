@@ -40,7 +40,7 @@
   <script language="JavaScript" src="assets/js/customplayer.js"></script>
   <script language="JavaScript" src="assets/js/music.js"></script>
   <script src="http://code.responsivevoice.org/responsivevoice.js"></script>
-  <script src="./assets/js/rvoice.js"></script>
+  <!--script src="./assets/js/rvoice.js"></script-->
 
   <body>
 
@@ -124,13 +124,13 @@
         var posts = JSON.parse(stringified_data);
         console.log(posts);
 
-
         $(posts).each(function(index, post) {
           setTimeout(function() {
             responsiveVoice.speak(post[3]);
           }, 2000*index)
-          
         })
+
+
         
       })
 
