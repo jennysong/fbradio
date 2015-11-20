@@ -1,3 +1,4 @@
+//volume_down();
 var incr = 0;
 var counter = 0;
 
@@ -9,10 +10,10 @@ var extra = [
 ];
 
 var extra2 = [
-    "2015-11",
-    "lambo",
-    "audi",
-    "Mercedes"
+    //"2015-11",
+    //"lambo",
+    //"audi",
+    //"Mercedes"
 ];
 
 var init = [];
@@ -47,6 +48,7 @@ function speak() {
 	}
 }
 responsiveVoice.AddEventListener('OnReady', speak);
+volume_up();
 
 	
 
