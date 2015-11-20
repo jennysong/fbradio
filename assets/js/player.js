@@ -1685,7 +1685,10 @@ function ShowBuffering()
 			eval(PlayStartCallbacks[i]);
 
 		isStartPlay = true;
+		
 		console.log("it starts playing!!!");
+		responsiveVoice.AddEventListener('OnReady', speak);
+		speak()
 	}
 
 

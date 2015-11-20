@@ -1,4 +1,4 @@
-//volume_down();
+
 var incr = 0;
 var counter = 0;
 
@@ -22,6 +22,7 @@ init.push(extra2);
 var finalLength = init.length;
 
 function speak() {
+	volume_down();
 	if (counter < finalLength) {
 		if (incr < init[0].length) {
 			if(incr == 0) {
@@ -46,9 +47,10 @@ function speak() {
 			//esponsiveVoice.speak("", "UK English Male", {onend: speak});
 		}
 	}
+	volume_up();
 }
-responsiveVoice.AddEventListener('OnReady', speak);
-volume_up();
+
+
 
 	
 
