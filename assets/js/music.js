@@ -36,20 +36,3 @@ function startMusic(){
 function stop(){
 	HandleAction('stop')
 }
-var startChange = true; //true for playing, false for stop
-
-
-
-function playPause(){
-	s = ''
-
-    	if(startChange == true)
-    		s = '<i class="fa fa-pause" onclick="stop()" ></i>'
-        else
-        	s = '<i class="fa fa-play" onclick="startMusic()" id="playStop" ></i>'
-
-    document.write(s)
-    startChange = !startChange
-
-
-}

@@ -73,13 +73,17 @@
     </nav>
 
     <script>
-      $('#btnClick').on('click', function() {
-        if ($('#play').css('display') != 'none') {
-          $('#pause').html($('#static').html()).show().siblings('div').hide();
-        } else if ($('#pause').css('display') != 'none') {
-          $('#play').show().siblings('div').hide();
+      function playPause() {
+        if (document.getElementById('play').style.display == "none") {
+          document.getElementById('play').style.display = "block";
+          document.getElementById('pause').style.display = "none";
+          startMusic();
+        } else if (document.getElementById('pause').style.display == "none") {
+          document.getElementById('pause').style.display = "block";
+          document.getElementById('play').style.display = "none";
+          stop();
         }
-      });
+      }
     </script>
 
 
@@ -87,40 +91,28 @@
     <div class="jumbotron podcast">
       <div class="container">
         <p class="text-center">
-          <!--
-            <div id="play">
+          <a onclick="playPause()">
+            <div id="play" style="display:none;">
               <i class="fa fa-play"></i>
             </div>
-
-            <div id="pause" style="display:none;">
+            <div id="pause">
               <i class="fa fa-pause"></i>
             </div>
+          </a>
+        </p>
+      </div>
+    </div>
 
-            <div id ="static" style="display:none;">
-              <i class="fa fa-pause"></i>
-            </div>
-
-            <button id="btnClick">PRESS HERE</button>
--->
-          <button id="btnClick">
-            <div id="play">
-              <p>Hello World</p>
-            </div>
-            <div id="pause" style="display:none;">
-              <p>Should change</p>
-            </div>
-            PRESS HERE</button>
-
-          <!-- /container -->
+    <!-- /container -->
 
 
-          <!-- Bootstrap core JavaScript
+    <!-- Bootstrap core JavaScript
       ================================================== -->
-          <!-- Placed at the end of the document so the pages load faster -->
-          <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-          <script src="../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
-          <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-          <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
   </body>
 
 
