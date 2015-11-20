@@ -116,22 +116,21 @@
 
 
     <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
+    <script src="/assets/js/post_speaker.js"></script>
+    <script src="/assets/js/moment.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/annyang/2.0.0/annyang.min.js"></script>
+    <script src="/assets/js/voice_listener.js"></script>
 
     <script>
+      var speaker = new PostSpeaker;
       var socket = io();
       socket.emit('register', "<%= rand_token %>");
       socket.on('new_messages', function(stringified_data) {
         var posts = JSON.parse(stringified_data);
-        console.log(posts);
 
         $(posts).each(function(index, post) {
-          setTimeout(function() {
-            responsiveVoice.speak(post[3]);
-          }, 2000*index)
+          speaker.add(post);
         })
-
-
-        
       })
 
     </script>
