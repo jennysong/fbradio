@@ -29,10 +29,15 @@ function volume_up(){
 }
 
 function startMusic(){
+	var mute;
 
-	HandleAction('playnow')
+	mute = GetMute();
+	SetMute(!mute);
 }
 
 function stop(){
-	HandleAction('stop')
+	var mute;
+
+	mute = GetMute();
+	SetMute(!mute);
 }
