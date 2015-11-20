@@ -8,8 +8,10 @@ var secureRandom  = require('secure-random')
 var base64        = require('base-64')
 var utf8          = require('utf8')
 var Client        = require('node-rest-client').Client;
-
+var OAuth         = require('OAuth');
 var client        = new Client()
+
+
 var app = require('express')();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
@@ -61,7 +63,43 @@ app.get('/music', function (req, res) {
   res.render('music', {rand_token: randomSecurity});
 });
 
+ var OAuth2 = OAuth.OAuth2;    
+ var twitterConsumerKey = config.twitter_key;
+ var twitterConsumerSecret = config.twitter_secret;
+ var oauth2 = new OAuth2(
+   twitterConsumerKey,
+   twitterConsumerSecret, 
+   'https://api.twitter.com/', 
+   null,
+   'oauth2/token', 
+   null);
+
 app.get('/login2', function (req, res) {
+  oauth2.getOAuthAccessToken(
+   '',
+   {'grant_type':'client_credentials'},
+   function (e, access_token, refresh_token, results){
+     console.log('bearer: ',access_token);
+     /*
+     oauth2.get('protected url', 
+       access_token, function(e,data,res) {
+         if (e) return callback(e, null);
+         if (res.statusCode!=200) 
+           return callback(new Error(
+             'OAuth2 request failed: '+
+             res.statusCode),null);
+         try {
+           data = JSON.parse(data);
+
+         }
+         catch (e){
+           return callback(e, null);
+         }
+         return callback(e, data);
+      });*/
+   });
+
+  /*
   //var bytes1 = utf8.encode(config.twitter_key)
   //var bytes2 = utf8.encode(config.twitter_secret)
   var encoded = base64.encode(config.twitter_key+":"+config.twitter_secret)
@@ -81,7 +119,7 @@ app.get('/login2', function (req, res) {
     console.log(response);
     //res.redirect('music')
 
-  });
+  });*/
 });
   
   
