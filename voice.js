@@ -2,14 +2,13 @@ var env = process.env.NODE_ENV || "development";
 var express = require('express');
 var app = express();
 
-
 app.set('view engine', 'ejs');
 app.set('views', './views');
 app.use('/assets', express.static('assets'));
 
 
 app.get('/voice', function (req, res) {
-  res.send('asdf');
+  res.render('voice');
 });
 
 

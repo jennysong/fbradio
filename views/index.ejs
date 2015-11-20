@@ -36,10 +36,10 @@
 
 <body>
 
-  <nav class="navigation-bar navbar-fixed-top">
+  <nav class="navigation-bar navbar-fixed-top" id ="#nav">
     <div class="container">
       <div class="navbar-header">
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="navbar" aria-expanded="false" aria-controls="navbar">
           <span class="sr-only">Toggle navigation</span>
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
@@ -69,56 +69,98 @@
     <div class="container">
       <br>
       <br>
-      <h1>Your Newsfeed. <br>At your command.</h1>
-      <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. Lorem Ipsum Bro.</p>
+      <h1>Your Newsfeed.
+        <br>At your command.</h1>
+      <hr class="dark">
+      <p>Got your hands full?</p>
+      <p>Voicebook enables users to listen to your the latest Twitter, Facebook, and Instagram Feeds, controlled through your voice.</p>
       <br>
-
-      <div class = "col-md-3">
-      <p class="text-right"><a class="btn btn-primary btn-lg" href="#" role="button">Voicebook Your Feed</a></p>
+      <div class="row">
+        <div class="col-md-3 text-left"></div>
+        <div class="col-md-3 text-left"></div>
+        <div class="col-md-3 text-left"></div>
+        <div class="col-md-3 text-right">
+          <form>
+            <label>
+              Facebook <i class="fa fa-facebook-official"></i> |
+              <input type="checkbox" id="cbox1" value="facebook">
+            </label>
+            <br>
+            <label>
+              Instagram <i class="fa fa-instagram"></i> |
+              <input type="checkbox" id="cbox2" value="instagram">
+            </label>
+            <br>
+            <label>
+              Twitter <i class="fa fa-twitter"></i> |
+              <input type="checkbox" id="cbox3" value="twitter">
+            </label>
+            <br>
+          </form>
+          <br>
+        </div>
+      </div>
+      <p class="text-right"><a class="btn btn-primary btn-lg" href="/music" role="button">Voicebook Your Feed</a></p>
     </div>
   </div>
 
-  <div class="container">
-    <!-- Example row of columns -->
-    <div class="row">
-      <div class="col-md-4">
-
-        <div class="boxes">
-          <div class="boxes-description"></div>
+    <div class="container">
+      <!-- Example row of columns -->
+      <div class="row">
+        <div class="col-md-12">
+          <h1 class="text-center">Why Voicebook?</h1>
+          <hr>
+          <br>
         </div>
+        <div class="col-md-4">
 
-
-        <h3>Heading</h3>
-        <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-        <br>
-        <p class="text-right"><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
-      </div>
-      <div class="col-md-4">
-        <div class="boxes">
-          <div class="image"></div>
+          <div class="boxes">
+            <div class="overlay">
+              <i class="fa fa-eye-slash"></i>
+            </div>
+          </div>
+          <h3>For the visually impaired</h3>
+          <p>Voicebook offers clear voice playback and recognition, eliminating the need for visual interactions.
+           Simply listen to the autmated social news feed and act by just using your voice. </p>
+          <br>
         </div>
-
-        <h3>Heading</h3>
-        <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-        <br>
-        <p class="text-right"><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
-      </div>
-      <div class="col-md-4">
-        <div class="boxes">
-          <div class="image"></div>
+        <div class="col-md-4">
+          <div class="boxes">
+            <div class="overlay">
+              <i class="fa fa-car"></i>
+            </div>
+          </div>
+          <h3>Combat distracted driving</h3>
+          <p>Distracted driving is a huge problem with the rise of hyper-connected societies. Resist the urge
+          to check your phone by having your Facebook, Twitter, and Instagram feeds read to you. Additionally, like, comment,
+         retweet your favourite social news through intelligent voice recognition. </p>
+          <br>
         </div>
+        <div class="col-md-4">
+          <div class="boxes">
+            <div class="overlay">
+              <i class="fa fa-hand-spock-o"></i>
+            </div>
+          </div>
 
-        <h3>Heading</h3>
-        <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
-        <br>
-        <p class="text-right"><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+          <h3>For work & sport</h3>
+          <p>Have your social feeds read to you while you multitask. Whether you're at the gym, the office,
+          or carrying out errands, maximize your time while staying connected to your social enviornment.</p>
+          <br>
+        </div>
       </div>
-    </div>
-
+      <!--
+      <div class = "row">
+        <div class = "col-md-4"><p class="text-right"><a class="btn btn-default" href="#" role="button">Try It Out! &raquo;</a></p></div>
+        <div class = "col-md-4"><p class="text-right"><a class="btn btn-default" href="#" role="button">Try It Out! &raquo;</a></p></div>
+        <div class = "col-md-4"><p class="text-right"><a class="btn btn-default" href="#" role="button">Try It Out! &raquo;</a></p></div>
+      </div>
+    -->
+<br>
     <hr>
 
     <footer>
-      <p>&copy; voicebook 2015 | terms </p>
+      <p>&copy; voicebook 2015 | <a href ="/terms">terms of use</a> | made with <i class="fa fa-heart"></i> at Facebook HQ</p>
     </footer>
   </div>
   <!-- /container -->
