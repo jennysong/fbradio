@@ -4,7 +4,12 @@ var express = require('express');
 var session = require('express-session')
 var file_store = require('session-file-store')(session)
 var moment = require('moment');
-var app = express();
+var secureRandom = require('secure-random')
+
+var app = require('express')();
+var http = require('http').Server(app);
+var io = require('socket.io')(http);
+
 
 global.config = require(__dirname + '/config.json')[env];
 global.rest   = new (require('node-rest-client').Client);
@@ -19,7 +24,7 @@ app.use(session({
   cookie: { maxAge: 60000 }
 }))
 
-
+var login_users = new(require('./user_pot'))
 
 app.get('/', function (req, res) {
   res.render('index');
@@ -27,7 +32,7 @@ app.get('/', function (req, res) {
 
 /*
 app.get('/music', function (req,res){
-  res.render('music')
+  res.render('music')?
 })
 */
 
@@ -46,43 +51,78 @@ app.get('/authorize', function (req, res) {
   })
 });
 
-var request_data = function(req){
-  var messages_array = []
-  var last_request_time
-  rest.get("https://graph.facebook.com/me/feed?fields=from,message,story,created_time&access_token="+req.session.access_token, function(data, response){
-    postData = JSON.parse(data.toString());
-    feedData = postData.data;
-    count = feedData.length;
-    for (i=count-1; i>=0; i--){
-      if (feedData[i].created_time > latest_request_time && feedData[i].from.name != req.session.userName){  //>=
-        message = [feedData[i].from.name, feedData[i].created_time, feedData[i].story, feedData[i].message]
-        messages_array.push(message);
-        last_request_time = feedData[i].created_time
-      }
-    }
-    latest_request_time = last_request_time || latest_request_time;
-    console.log(messages_array); // send the messages_array out 
-  });
-}
-
-
 app.get('/music', function (req, res) {
-  latest_request_time = moment().utc().format("YYYY-MM-DDTHH:mm:ss.SSSZZ"); //latest_request_time
-  rest.get("https://graph.facebook.com/me?access_token="+req.session.access_token, function(data, response){
-    userData = JSON.parse(data.toString())
-    req.session.userName = userData.name;   //req.session.userName
-    req.session.userId = userData.id;       //req.session.userId
-  });
-  request_data(req);
-  var every5sec = setInterval(function() { request_data(req) }, 5000);
-  res.render('music');
+  var randomSecurity = secureRandom.randomUint8Array(10)
+  login_users.add(randomSecurity, req.session.access_token);
+  res.render('music', {rand_token: randomSecurity});
 });
 
 
-var server = app.listen(3000, function () {
+var server = http.listen(3000, function () {
   var host = server.address().address;
   var port = server.address().port;
 
   console.log('Example app listening at http://%s:%s', host, port);
 });
 // var voicelist = responsivevoice.getVoice();
+
+
+
+// pulling my wall
+
+var request_data = function(user){
+  // the user object has socket object now.
+  // also the user object has access_token.
+
+  var messages_array = []  
+  var last_request_time
+  rest.get("https://graph.facebook.com/me/feed?fields=from,message,story,created_time&access_token="+user.access_token, function(data, response){
+    postData = JSON.parse(data.toString());
+    feedData = postData.data;
+    count = feedData.length;
+    for (i=count-1; i>=0; i--){
+      if (feedData[i].created_time > user.latest_request_time && feedData[i].from.name != user.user_name){  //>=
+        message = [feedData[i].from.name, feedData[i].created_time, feedData[i].story, feedData[i].message]
+        messages_array.push(message); 
+        last_request_time = feedData[i].created_time
+      }
+    }
+    user.latest_request_time = last_request_time || user.latest_request_time;
+
+    // our app sends the message_array to the user's socket. 
+
+    if(messages_array.length > 0) {
+      user.socket.emit('new_messages', JSON.stringify(messages_array));
+    }
+  });
+}
+
+
+// socket code
+
+io.on('connection', function(socket){
+  socket.on('register', function(random_token) {
+    // when user is successfully logged in (when user is on /music)
+    // we find the logged in from login users.
+    // and start broadcast new posts here.
+
+    user = login_users.find(random_token)
+    if(!user) return;
+
+    user.socket = socket
+    user.latest_request_time = moment().utc().format("YYYY-MM-DDTHH:mm:ss.SSSZZ");
+
+    rest.get("https://graph.facebook.com/me?access_token="+user.access_token, function(data, response){
+      userData = JSON.parse(data.toString())
+      user.user_name = userData.name;   //req.session.userName
+      user.user_id   = userData.id;       //req.session.userId
+      request_data(user);
+      var every5sec = setInterval(function() { request_data(user) }, 5000);
+    });
+  })
+
+  socket.on('disconnect', function() {
+    
+  })
+
+})

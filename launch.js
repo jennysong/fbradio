@@ -1,0 +1,1 @@
+require("supervisor").run(['-e', 'ejs|js|jso', 'node', 'app.js'])
