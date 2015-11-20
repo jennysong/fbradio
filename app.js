@@ -1,8 +1,5 @@
-<<<<<<< Updated upstream
 var env = process.env.NODE_ENV || "development";
-=======
-//<script src="http://code.responsivevoice.org/responsivevoice.js"></script>
->>>>>>> Stashed changes
+
 var express = require('express');
 var app = express();
 
