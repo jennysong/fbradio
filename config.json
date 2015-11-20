@@ -4,17 +4,17 @@
     "client_id": "875721715860023",
     "redirect_uri": "http://localhost:3000/authorize",
     "client_secret": "9354ac000665ddc74852157b3e6a686e",
-    "twitter_key": "Cb9Z829xpCgLCDhNyd5BXwRUc",
-    "twitter_secret": "zhAmK5VFHSEiBEeiBvAeGtLmlhHyj0xKGK3Rt5oDm54fg1zb7i",
-    "twitter_nonce": "aefasfef8sdfsd51fw4r84sf5sg24x145eq46sf"
+    "twitter_key": "3Kv4vBFFtwGxNh3KeafTFnCuN",
+    "twitter_secret": "2zmWnUHLmkc8XGeQSau54rB5Gb4ZrFR1QEWm0dwiuC4CqyLPWk",
+    "twitter_nonce": "65a9ae29b3f4ab0de60556153449c189"
   },
   "production": {
     "port": 80,
     "client_id": "875721715860023",
     "redirect_uri": "http://thevoicebook.me/authorize",
     "client_secret": "9354ac000665ddc74852157b3e6a686e",
-    "twitter_key": "Cb9Z829xpCgLCDhNyd5BXwRUc",
-    "twitter_secret": "zhAmK5VFHSEiBEeiBvAeGtLmlhHyj0xKGK3Rt5oDm54fg1zb7i",
-    "twitter_nonce": "aefasfef8sdfsd51fw4r84sf5sg24x145eq46sf"
+    "twitter_key": "3Kv4vBFFtwGxNh3KeafTFnCuN",
+    "twitter_secret": "2zmWnUHLmkc8XGeQSau54rB5Gb4ZrFR1QEWm0dwiuC4CqyLPWk",
+    "twitter_nonce": "65a9ae29b3f4ab0de60556153449c189"
   }
 }
