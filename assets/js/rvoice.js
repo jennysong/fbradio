@@ -26,7 +26,7 @@ function speak() {
 		string += "Created by " + messages_array[0][0] + " At " + messages_array[0][1] + " message is " + messages_array[0][2] + " last one " + messages_array[0][3];
 		console.log(string);
 		responsiveVoice.speak(string,"UK English Male",{onend: function(){
-		    volume_up(); 
+		  volume_up(); 
 			setTimeout(speak, 0); 
 		} });
 		messages_array.shift();
