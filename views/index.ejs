@@ -176,7 +176,24 @@
   <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
   <script src="http://code.responsivevoice.org/responsivevoice.js"></script>
   <script>
-  responsiveVoice.speak('Welcome to the voice book. To begin, please say Kumbaya','US English Female');
+  setTimeout(function() {
+    responsiveVoice.speak('Welcome to the voice book. To begin, please say GO')
+  },2000);
+
+
+  </script>
+
+  <script src="//cdnjs.cloudflare.com/ajax/libs/annyang/2.0.0/annyang.min.js"></script>
+  <script>
+    if (annyang) {
+      // Add our commands to annyang
+      annyang.addCommands({
+        'go': function() { window.location.href = "/login" }
+      });
+
+      // Start listening.
+      annyang.start();
+    }
   </script>
 
 </body>

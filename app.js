@@ -224,9 +224,9 @@ io.on('connection', function(socket){
     console.log('### I just liked the id : '+message_id);
   })
 
-  socket.on('comment_post', function(message_id) {
-    rest.post("https://graph.facebook.com/"+message_id+"/comments?message=Sounds+good,+See+you+tomorrow.&access_token="+socket.app_user.access_token, function(data, response) {});
-    console.log('### I just commented on the id : '+message_id);
+  socket.on('comment_post', function(message_id, message) {
+    rest.post("https://graph.facebook.com/"+message_id+"/comments?message="+encodeURIComponent(message)+"&access_token="+socket.app_user.access_token, function(data, response) {});
+    console.log('### I just commented on the id : '+message_id + '/' +message);
   })
 
   socket.on('disconnect', function() {

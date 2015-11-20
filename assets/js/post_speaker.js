@@ -1,7 +1,7 @@
 var PostSpeaker = function() {
   this.messages = []
   this.voice_tone = "UK English Male";
-  this.action_time = 2000
+  this.action_time = 5000
   this.playing = false
 }
 
@@ -23,19 +23,20 @@ PostSpeaker.prototype.start = function() {
 PostSpeaker.prototype.speak = function(index, callback) {
   var _this   = this; // to keep this context in callbacks
   var message = this.messages[index];
-  var listener = new VoiceListener(message.id);
   if(!message) return;
+
+  var listener = new VoiceListener(message.id);
 
   console.log('## app speaks: ' + this.humanize_message(message));
   responsiveVoice.speak(this.humanize_message(message), this.voice_tone, {
     onstart: function() {
-      volume_down();
+      try { volume_down(); } catch(e) { }
       _this.playing = true
       _this.remove(index);
-      listener.start()
+      listener.start();
     },
     onend: function() {
-      volume_up();
+      try { volume_up(); } catch(e) { }
       setTimeout(function() {
         listener.stop()
         _this.playing = false
