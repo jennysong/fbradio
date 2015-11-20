@@ -42,7 +42,7 @@ app.get('/authorize', function (req, res) {
   rest.get("https://graph.facebook.com/v2.3/oauth/access_token?" + query, function(data, response){
     data = JSON.parse(data.toString())
     req.session.access_token = data.access_token  //req.session.access_token
-    res.redirect('fbresult')  //res.redirect('radio')
+    res.redirect('music')  //res.redirect('radio')
   })
 });
 
@@ -66,7 +66,7 @@ var request_data = function(req){
 }
 
 
-app.get('/fbresult', function (req, res) {
+app.get('/music', function (req, res) {
   latest_request_time = moment().utc().format("YYYY-MM-DDTHH:mm:ss.SSSZZ"); //latest_request_time
   rest.get("https://graph.facebook.com/me?access_token="+req.session.access_token, function(data, response){
     userData = JSON.parse(data.toString())
