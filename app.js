@@ -25,9 +25,11 @@ app.get('/', function (req, res) {
   res.render('index');
 });
 
+/*
 app.get('/music', function (req,res){
   res.render('music')
 })
+*/
 
 app.get('/login', function (req, res) {
   scopes = ['public_profile', 'user_posts'] 
@@ -40,13 +42,9 @@ app.get('/authorize', function (req, res) {
   rest.get("https://graph.facebook.com/v2.3/oauth/access_token?" + query, function(data, response){
     data = JSON.parse(data.toString())
     req.session.access_token = data.access_token  //req.session.access_token
-    console.log(req.session.access_token+" :)")
     res.redirect('fbresult')  //res.redirect('radio')
   })
 });
-
-var dothis = function(){console.log("5 sec!!")};
-
 
 var request_data = function(req){
   var messages_array = []
@@ -64,7 +62,6 @@ var request_data = function(req){
     }
     latest_request_time = last_request_time || latest_request_time;
     console.log(messages_array); // send the messages_array out 
-    console.log('___________________________________________________________');     
   });
 }
 
@@ -78,7 +75,7 @@ app.get('/fbresult', function (req, res) {
   });
   request_data(req);
   var every5sec = setInterval(function() { request_data(req) }, 5000);
-  res.send('!');
+  res.render('music');
 });
 
 
