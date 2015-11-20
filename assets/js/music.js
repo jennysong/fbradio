@@ -31,7 +31,7 @@ function startMusic(){
 }
 
 function stop(){
-	HandleAction('stop')	
+	HandleAction('stop')
 }
 var startChange = true; //true for playing, false for stop
 
@@ -48,5 +48,5 @@ function playPause(){
     document.write(s)
     startChange = !startChange
 
-  
+
 }

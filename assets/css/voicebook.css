@@ -24,8 +24,8 @@ a.navbar-brand {
   color: #fff;
 }
 a.navbar-brand:hover, :active {
-  font-weight: 200;
-  -moz-transition: all 0.5s ease-in-out;
+  color: #BBDEFB;
+    -moz-transition: all 0.5s ease-in-out;
   -webkit-transition: all 0.5s ease-in-out;
   -o-transition: all 0.5s ease-in-out;
 }
@@ -37,6 +37,7 @@ a.navbar-brand:hover, :active {
   box-shadow: rgba(0, 0, 0, 0.1) 0 8px 8px 0;
   -webkit-box-shadow: rgba(0, 0, 0, 0.1) 0 8px 8px 0;
   -moz-box-shadow: rgba(0, 0, 0, 0.1) 0 8px 8px 0;
+  overflow: hidden;
 }
 
 /*
@@ -92,10 +93,44 @@ a.navbar-brand:hover, :active {
   -o-transition: all 0.5s ease-in-out;
 }
 
+.fa-heart {
+  color: #F44336;
+}
 
 label {
   font-size: 20px;
 }
 label i {
   color: #3b5998;
+}
+
+.fa-car {
+  font-size: 150px;
+  color: #3b5998;
+  opacity: 0.8;
+}
+.fa-eye-slash {
+  font-size: 150px;
+  color: #3b5998;
+  opacity: 0.8;
+}
+.fa-hand-spock-o {
+  font-size: 150px;
+  color: #3b5998;
+  opacity: 0.8;
+}
+.overlay {
+  line-height: 300px;
+  text-align: center;
+  position: relative;
+}
+hr.dark {
+  border-color: #000;
+  border-width: medium;
+  opacity: 0.1;
+}
+
+footer {
+  text-align: center;
+  padding: 15px;
 }
