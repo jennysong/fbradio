@@ -1407,12 +1407,15 @@ function VolumeAbs(val, bNoCookie)
 
 function VolumeRel(val)
 {
+	console.log('VolumeRel is called, val: '+val);
 	if (GetMute() == true)
 		Mute(gSiteImageDir);
 	else {
 		var vol = GetCookieVolume() + val;
+		console.log(GetCookieVolume())
 
 		if (vol <= (gMinVol + Math.abs(gProgressIncr)))
+			VolumeAbs(gMinVol + Math.abs(gProgressIncr),false)
 			return false;
 
 		VolumeAbs(vol, false);
@@ -1687,8 +1690,8 @@ function ShowBuffering()
 		isStartPlay = true;
 		
 		console.log("it starts playing!!!");
-		responsiveVoice.AddEventListener('OnReady', speak);
-		speak()
+		//responsiveVoice.AddEventListener('OnReady', speak);
+		//speak()
 	}
 
 
