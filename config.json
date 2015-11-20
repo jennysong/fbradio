@@ -1,7 +1,14 @@
 {
   "development": {
+    "port": 3000,
     "client_id": "875721715860023",
     "redirect_uri": "http://localhost:3000/authorize",
+    "client_secret": "9354ac000665ddc74852157b3e6a686e"
+  },
+  "production": {
+    "port": 80,
+    "client_id": "875721715860023",
+    "redirect_uri": "http://thevoicebook.me/authorize",
     "client_secret": "9354ac000665ddc74852157b3e6a686e"
   }
 }

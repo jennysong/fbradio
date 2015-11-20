@@ -40,7 +40,7 @@
   <script language="JavaScript" src="assets/js/customplayer.js"></script>
   <script language="JavaScript" src="assets/js/music.js"></script>
   <script src="http://code.responsivevoice.org/responsivevoice.js"></script>
-  <script src="./assets/js/rvoice.js"></script>
+  <!--script src="./assets/js/rvoice.js"></script-->
 
   <body>
 
@@ -116,22 +116,30 @@
 
 
     <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
+    <script src="/assets/js/post_speaker.js"></script>
+    <script src="/assets/js/moment.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/annyang/2.0.0/annyang.min.js"></script>
+    <script src="/assets/js/voice_listener.js"></script>
 
     <script>
+      var speaker = new PostSpeaker;
       var socket = io();
       socket.emit('register', "<%= rand_token %>");
       socket.on('new_messages', function(stringified_data) {
         var posts = JSON.parse(stringified_data);
-        console.log(posts);
-
 
         $(posts).each(function(index, post) {
+<<<<<<< HEAD
           setTimeout(function() {
             responsiveVoice.speak(post[3]);
           }, 2000*index)
 
         })
 
+=======
+          speaker.add(post);
+        })
+>>>>>>> 6dca99bf402742f8a548aa05d689e9e7616f4866
       })
 
     </script>

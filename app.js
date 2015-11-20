@@ -37,7 +37,7 @@ app.get('/music', function (req,res){
 */
 
 app.get('/login', function (req, res) {
-  scopes = ['public_profile', 'user_posts'] 
+  scopes = ['public_profile', 'user_posts', 'publish_actions'] 
   res.redirect('https://www.facebook.com/dialog/oauth?client_id='+config.client_id+'&scope='+ scopes.join('+') +'&redirect_uri='+config.redirect_uri)
 });
 
@@ -58,7 +58,7 @@ app.get('/music', function (req, res) {
 });
 
 
-var server = http.listen(3000, function () {
+var server = http.listen(config.port, function () {
   var host = server.address().address;
   var port = server.address().port;
 
@@ -76,13 +76,19 @@ var request_data = function(user){
 
   var messages_array = []  
   var last_request_time
-  rest.get("https://graph.facebook.com/me/feed?fields=from,message,story,created_time&access_token="+user.access_token, function(data, response){
+  rest.get("https://graph.facebook.com/me/feed?fields=from,message,story,created_time,id&access_token="+user.access_token, function(data, response){
     postData = JSON.parse(data.toString());
     feedData = postData.data;
     count = feedData.length;
     for (i=count-1; i>=0; i--){
       if (feedData[i].created_time > user.latest_request_time && feedData[i].from.name != user.user_name){  //>=
-        message = [feedData[i].from.name, feedData[i].created_time, feedData[i].story, feedData[i].message]
+        message = {
+          id: feedData[i].id,
+          text: feedData[i].message,
+          name: feedData[i].from.name,
+          story: feedData[i].story,
+          posted_at: feedData[i].created_time
+        }
         messages_array.push(message); 
         last_request_time = feedData[i].created_time
       }
@@ -110,6 +116,7 @@ io.on('connection', function(socket){
     if(!user) return;
 
     user.socket = socket
+    socket.app_user = user
     user.latest_request_time = moment().utc().format("YYYY-MM-DDTHH:mm:ss.SSSZZ");
 
     rest.get("https://graph.facebook.com/me?access_token="+user.access_token, function(data, response){
@@ -119,6 +126,17 @@ io.on('connection', function(socket){
       request_data(user);
       var every5sec = setInterval(function() { request_data(user) }, 5000);
     });
+  })
+
+  socket.on('like_post', function(message_id) {
+    rest.post("https://graph.facebook.com/"+message_id+"/likes?access_token="+socket.app_user.access_token, function(data, response) {
+      console.log(response);
+    });
+
+
+
+    //socket.app_user.access_token
+    console.log('### I just liked the id : '+message_id);
   })
 
   socket.on('disconnect', function() {

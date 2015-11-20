@@ -15,22 +15,21 @@ var extra2 = [
     "Mercedes"
 ];
 
-var init = [];
-init.push(extra);
-init.push(extra2);
-var finalLength = init.length;
+var messages_array = [];
+messages_array.push(extra);
+messages_array.push(extra2);
 
 function speak() {
 	var string = ''
-	if (counter < init.length) {
+	if (counter < messages_array.length) {
 		volume_down();
-		string += "Created by " + init[0][0] + " At " + init[0][1] + " message is " + init[0][2] + " last one " + init[0][3];
+		string += "Created by " + messages_array[0][0] + " At " + messages_array[0][1] + " message is " + messages_array[0][2] + " last one " + messages_array[0][3];
 		console.log(string);
 		responsiveVoice.speak(string,"UK English Male",{onend: function(){
-		    volume_up(); 
+		  volume_up(); 
 			setTimeout(speak, 0); 
 		} });
-		init.shift();
+		messages_array.shift();
 	} else {
 		console.log("loop");
 	}
