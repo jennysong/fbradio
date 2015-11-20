@@ -175,25 +175,24 @@
   <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
   <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
   <script src="http://code.responsivevoice.org/responsivevoice.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/annyang/2.0.0/annyang.min.js"></script>
   <script>
   setTimeout(function() {
-    responsiveVoice.speak('Welcome to the voice book. To begin, please say GO')
+    responsiveVoice.speak('Welcome to the voice book. To begin, please say start', null, {
+      onstart: function() {
+        console.log('listening your voice..')
+        // Add our commands to annyang
+        annyang.addCommands({
+          'start': function() { window.location.href = "/login" }
+        });
+
+        // Start listening.
+        annyang.start();
+      }
+    })
   },2000);
 
 
-  </script>
-
-  <script src="//cdnjs.cloudflare.com/ajax/libs/annyang/2.0.0/annyang.min.js"></script>
-  <script>
-    if (annyang) {
-      // Add our commands to annyang
-      annyang.addCommands({
-        'go': function() { window.location.href = "/login" }
-      });
-
-      // Start listening.
-      annyang.start();
-    }
   </script>
 
 </body>
