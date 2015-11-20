@@ -1,15 +1,15 @@
 setCustomVolume();
 DrawPlayer(0, gPlayerColor);
-var incr;
+var scaled_valume;
 
 function setCustomVolume()
 {
 	var v = GetCookieVolume();
 
 	SetVolumeRanges(parent.GetPlayer());
-	incr = gProgressIncr;
+	scaled_valume = gProgressIncr;
 	VolRange = gMaxVol - gMinVol;
-	gOffCells = Math.floor(Math.abs((VolRange-Math.abs(v))/incr));
+	gOffCells = Math.floor(Math.abs((VolRange-Math.abs(v))/scaled_valume));
 
 }
 
@@ -19,13 +19,13 @@ document.write(s);
 
 function volume_down(){
 	console.log("volume_down called")
-	VolumeRel(parseInt(-incr*4))
+	VolumeAbs(parseInt(scaled_valume*1.5),false)
 }
 
 function volume_up(){
 
 	console.log("volume_up called")
-	VolumeRel(parseInt(incr*4))
+	VolumeAbs(parseInt(scaled_valume*5),false)
 }
 
 function startMusic(){
